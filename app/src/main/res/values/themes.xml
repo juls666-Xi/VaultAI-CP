@@ -1,0 +1,4 @@
+<resources>
+    <!-- Base theme; Compose overrides this at runtime via Theme.kt -->
+    <style name="Theme.OfflineAI" parent="android:Theme.Material.Light.NoActionBar" />
+</resources>

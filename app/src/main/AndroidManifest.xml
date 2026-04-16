@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--
+        USB Host API: allows the app to communicate with USB devices as a host.
+        Required for reading model files from a USB drive.
+    -->
+    <uses-feature android:name="android.hardware.usb.host" android:required="false" />
+
+    <!-- External storage: needed if model is on shared USB-OTG storage (legacy) -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
+    <!-- MANAGE_EXTERNAL_STORAGE for Android 13+: required to read arbitrary USB paths -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+
+    <!-- Record audio for voice input feature -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <!-- Write external storage: for exporting chats as text file -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+
+    <application
+        android:allowBackup="true"
+        android:label="@string/app_name"
+        android:theme="@style/Theme.OfflineAI"
+        android:supportsRtl="true">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!--
+                USB_DEVICE_ATTACHED intent: Android will show a permission dialog
+                asking the user to allow this app to communicate with the USB device.
+                The device_filter.xml restricts which USB devices trigger this dialog.
+            -->
+            <intent-filter>
+                <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED"
+                android:resource="@xml/device_filter" />
+
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    device_filter.xml
+    -----------------
+    Tells Android which USB devices should trigger the USB_DEVICE_ATTACHED intent
+    and prompt the user to open this app.
+
+    class="8"  → USB Mass Storage (includes flash drives / USB sticks)
+    class="0"  → Device-defined (catch-all for devices that self-identify via interface)
+
+    You can narrow this down by adding vendor_id / product_id if you target a
+    specific USB hardware dongle (e.g., a dedicated AI inference stick).
+-->
+<resources>
+    <!-- USB Mass Storage class — covers most USB flash drives -->
+    <usb-device class="8" subclass="6" protocol="80" />
+
+    <!-- Catch-all for composite USB devices -->
+    <usb-device class="0" />
+</resources>
